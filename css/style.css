@@ -121,6 +121,7 @@ body {
 }
 .header-link {
   display: block;
+  position: relative;
   padding: 24px 0;
   font-weight: 500;
   font-size: 16px;
@@ -128,6 +129,20 @@ body {
   letter-spacing: 0.02em;
   color: var(--overlay);
   text-decoration: none;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.header-link.active {
+  color: var(--primeryBrand);
+}
+.header-link.active::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  left: 0;
+  bottom: -1px;
+  border-radius: 2px;
+  background-color: var(--pressed);
 }
 
 .header-link:hover,
@@ -147,11 +162,16 @@ body {
   letter-spacing: 0.02em;
   color: var(--bodytext);
   text-decoration: none;
+  transition-property: color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .header-mail:hover,
 .header-tel:hover,
 .header-mail:focus,
 .header-tel:focus {
+  display: block;
   color: var(--pressed);
 }
 /* ------Hero section------ */
@@ -194,6 +214,7 @@ body {
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
   border-radius: 4px;
   cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .hero-button:hover,
 .hero-button:focus {
@@ -275,6 +296,9 @@ body {
   height: 100%;
   border-radius: 50%;
   background-color: var(--primeryBrand);
+  transition-property: background-color;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .team-social-icon {
   fill: #fff;
@@ -306,13 +330,14 @@ body {
   align-items: center;
   width: 100%;
   height: 100%;
-  border: 1px solid #8e8f99;
+  border: 1px solid;
   border-radius: 4px;
   color: #8e8f99;
+  transition-property: color;
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .customers-link:is(:hover, :focus) {
-  border-color: var(--pressed);
   color: var(--pressed);
 }
 .customers-icon {
@@ -383,6 +408,7 @@ body {
   height: 100%;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
+  transition: background 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .footer-social-icon {
   fill: #fff;
@@ -415,6 +441,9 @@ body {
   border: 1px solid var(--accent);
   border-radius: 4px;
   cursor: pointer;
+  transition-property: color, background, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 .filter-btn:hover,
 .filter-btn:focus {
@@ -445,7 +474,81 @@ body {
 }
 .card-link {
   display: block;
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
-.card-link:is(:hover, :focus) {
+
+.card-link:is(:hover, :focus) .card-text-overlay {
   box-shadow: var(--boxshadow);
+}
+
+.card-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-text-overlay {
+  position: absolute;
+  padding: 40px 32px;
+  top: 0;
+  left: 0;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  background-color: var(--primeryBrand);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: auto;
+}
+
+.card-link:hover .card-text-overlay {
+  transform: translateY(0);
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(46, 47, 66, 0.4);
+  top: 0;
+  left: 0;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal {
+  position: absolute;
+  width: 408px;
+  min-height: 500px;
+  background: #fcfcfc;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-close {
+  display: block;
+  margin-left: auto;
+  width: 24px;
+  height: 24px;
+  background: var(--accent);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+}
+.close-icon {
+  width: 100%;
+  height: 100%;
+}
+.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0);
 }
