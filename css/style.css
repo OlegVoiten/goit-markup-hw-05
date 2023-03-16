@@ -347,8 +347,7 @@ body {
 }
 /* -------------footer------------- */
 .footer {
-  /* display: flex; */
-  gap: 120px;
+  display: flex;
   padding: 100px 0;
   background: var(--bg);
 }
@@ -477,8 +476,11 @@ body {
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card-link:is(:hover, :focus) .card-text-overlay {
+.card-link:is(:hover, :focus) {
   box-shadow: var(--boxshadow);
+}
+.card-link:is(:hover, :focus) .card-text-overlay {
+  transform: translateY(0);
 }
 
 .card-wrapper {
@@ -499,12 +501,8 @@ body {
   height: 100%;
   transform: translateY(100%);
   background-color: var(--primeryBrand);
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   overflow: auto;
-}
-
-.card-link:hover .card-text-overlay {
-  transform: translateY(0);
 }
 
 .backdrop {
@@ -520,7 +518,7 @@ body {
 .modal {
   position: absolute;
   width: 408px;
-  min-height: 500px;
+  min-height: 576px;
   background: #fcfcfc;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 1px 3px rgba(0, 0, 0, 0.12),
     0px 2px 1px rgba(0, 0, 0, 0.2);
@@ -532,17 +530,26 @@ body {
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .modal-close {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: auto;
   width: 24px;
   height: 24px;
   background: var(--accent);
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: backround 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.modal-close:is(:hover, :focus) {
+  background: var(--pressed);
+  fill: var(--whitemain);
 }
 .close-icon {
-  width: 100%;
-  height: 100%;
+  width: 8px;
+  height: 8px;
 }
 .is-hidden {
   opacity: 0;
